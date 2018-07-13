@@ -25,12 +25,11 @@ def main():
 					print('[' + str(page) + ']')
 					
 					session = requests_html.HTMLSession()
-					r = session.get(url)
-					html = r.html
-
-                    if html.text.find('我们找不到任何与您的搜索条件匹配的结果，但是调整您的搜索条件可能会有所帮助。') >= 0:
-                        print('')
-                        break
+					html = session.get(url).html
+					
+					if html.text.find('我们找不到任何') >= 0:
+						print('')
+						break
 					
 					l = html.find('#houseList', first=True)
 					
